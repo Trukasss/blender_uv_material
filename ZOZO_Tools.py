@@ -89,7 +89,6 @@ class ZOZO_OT_RemoveChecker(bpy.types.Operator):
 
 
 class ZOZO_PT_panel(bpy.types.Panel):
-    """Creates a Panel in the Object properties window"""
     bl_label = "UV auto material"
     bl_idname = "UV_PT_material"
     bl_space_type = 'IMAGE_EDITOR'
