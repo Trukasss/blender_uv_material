@@ -25,9 +25,14 @@ class ZOZO_OT_AddChecker(bpy.types.Operator):
         tree = material.node_tree
         for node in tree.nodes:
             tree.nodes.remove(node)
+        n_coordinates = tree.nodes.new("ShaderNodeTexCoord")
         n_checker = tree.nodes.new("ShaderNodeTexChecker")
+        n_checker.inputs[3].default_value = 20
         n_output = tree.nodes.new("ShaderNodeOutputMaterial")
-        n_output.location = (200, 0)
+        nodes = [n_coordinates, n_checker, n_output]
+        for i in range(len(nodes)):
+            nodes[i].location = (i*200, 0)
+        tree.links.new(n_coordinates.outputs["UV"], n_checker.inputs[0])
         tree.links.new(n_checker.outputs[0], n_output.inputs[0])
         return material
 
